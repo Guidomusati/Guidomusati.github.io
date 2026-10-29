@@ -1,0 +1,209 @@
+/* Guido Musati — personal site. Clean academic look, one shared stylesheet. */
+:root {
+  --bg: #f8fafd;
+  --side-bg: #34497a;
+  --side-text: #ffffff;
+  --side-muted: #c3cbe0;
+  --side-line: rgba(255,255,255,.25);
+  --hot: #8ec3e6;
+  --hot-text: #3b7bb0;
+  --text: #1c1f2a;
+  --muted: #5d6275;
+  --line: #dfe5ee;
+  --accent: #34497a;
+  --accent-soft: #e8ebf3;
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12141c;
+    --side-bg: #27365c;
+    --side-text: #ffffff;
+    --side-muted: #b4bdd6;
+    --side-line: rgba(255,255,255,.2);
+    --hot: #6fa8d6;
+    --hot-text: #8ec3e6;
+    --text: #ebeaf2;
+    --muted: #a0a4b8;
+    --line: #2a2e3d;
+    --accent: #a3b2da;
+    --accent-soft: #232845;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--side-bg);
+  color: var(--side-text);
+  padding: 48px 28px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.photo, .photo-fallback {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 4px solid var(--hot);
+}
+.photo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.15);
+  color: var(--side-text);
+  font-family: var(--serif);
+  font-size: 44px;
+}
+
+.name {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 22px 0 4px;
+}
+.role {
+  font-size: 14px;
+  color: var(--side-muted);
+  margin-bottom: 28px;
+}
+
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav a {
+  color: var(--side-text);
+  text-decoration: none;
+  font-size: 15px;
+  padding: 6px 10px;
+  margin-left: -10px;
+  border-radius: 6px;
+}
+.nav a:hover { background: rgba(255,255,255,.14); }
+.nav a.current { color: #1c1f2a; font-weight: 600; background: var(--hot); }
+
+.links {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--side-line);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.links span { color: var(--side-muted); }
+.links a { color: var(--side-text); text-decoration: none; }
+.links a:hover { color: var(--hot); }
+
+/* ---------- Main ---------- */
+main {
+  flex: 1;
+  min-width: 0;
+  padding: 56px 56px 64px;
+  max-width: 760px;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 0 0 28px;
+}
+h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 5px;
+  margin-top: 14px;
+  border-radius: 3px;
+  background: var(--hot);
+}
+h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--accent);
+  margin: 40px 0 16px;
+}
+p { margin: 0 0 16px; }
+
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-color: var(--hot); }
+a:hover { color: var(--hot-text); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.news { margin-top: 36px; }
+.news ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.news li {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.news .date {
+  flex-shrink: 0;
+  width: 110px;
+  color: var(--hot-text);
+  font-weight: 600;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  padding-top: 1px;
+}
+
+.paper { margin: 0 0 22px; }
+.paper .title { font-weight: 600; }
+.paper .meta { font-size: 14px; color: var(--muted); }
+
+/* ---------- Phone ---------- */
+@media (max-width: 720px) {
+  body { flex-direction: column; }
+  .sidebar {
+    position: static;
+    height: auto;
+    width: 100%;
+    border-right: none;
+    padding: 28px 20px;
+  }
+  .photo, .photo-fallback { width: 96px; height: 96px; }
+  .nav { flex-direction: row; gap: 8px; }
+  .nav a { margin-left: 0; }
+  .links { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
+  main { padding: 32px 20px 48px; }
+  h1 { font-size: 32px; }
+  .news li { flex-direction: column; gap: 0; }
+}
+
+/* ---------- Teaching ---------- */
+.intro { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
+.paper .desc { font-size: 15px; margin-top: 4px; }
+.lang {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  vertical-align: 2px;
+}
